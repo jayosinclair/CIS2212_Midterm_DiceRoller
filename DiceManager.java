@@ -2,12 +2,20 @@ import java.util.Scanner;
 
 public class DiceManager {
 
-        // Use these values for the quick roll option.
+        //Use these values for the quick roll option.
         final int ROLLS = 1000;
         final int DICE = 2;
         final int SIDES = 6;
 
         //TODO: Declare variables for a DiceFactory and console input.
+        
+        private int choice = -1;
+        private int myRolls = -1;
+        private int myDice = -1;
+        private int mySides = -1;
+
+        Scanner scnr;
+        DiceFactory diceF;
 
         /**
          * Construct a Scanner and a new DiceFactory object.
@@ -15,6 +23,10 @@ public class DiceManager {
         public DiceManager()
         {
         	//TODO: Instantiate the DiceFactory and Scanner objects.
+
+            diceF = new DiceFactory();
+            scnr = new Scanner(System.in);
+
         }
 
         /**
@@ -22,19 +34,50 @@ public class DiceManager {
          */
         public void go()
         {
-            System.out.println("\nWelcome to Dice Roller.\n");
 
-        	//TODO: Display the menu and call inputInt to get the user's menu choice.
-        	
-        	//TODO: Write a switch statement to process the user's menu choice.
-        	//      Choice 0 (Quit) - break out of the menu loop so that the program exits.
-        	//      Choice 1 (Quick roll) - call the rollDice method and send the constants declared above.
-        	//      Choice 2 (Custom roll) - use inputInt to get the number of rolls, dice, and sides.
-            //		Choice 3 (results array) - get the array with the results of the last simulation.
-        	
-        	//TODO: Do all the above until the user chooses to quit.  Use the most appropriate loop statement.
-        	
+            do{
+            
+            displayMenu();
+            
+            choice = inputInt(scnr, "Enter Choice: ", 0, 3);
+
+            System.out.println("You chose: " + choice);
+            
+
+            switch (choice){
+
+                case 0: // Do nothing to break out of the menu loop.
+                    break;
+                
+                case 1: //Quick roll: call rollDice method and send the constants declared above.
+
+                    diceF.rollDice(ROLLS, SIDES, DICE);
+
+                    break;
+
+                case 2: //Custom roll: use inputInt to get the number of rolls, dice, and sides.
+
+                    myRolls = inputInt(scnr, "Enter nuber rolls: ", 1, 300);
+                    myDice = inputInt(scnr, "Enter number dice: ", 1, 3);
+                    mySides = inputInt(scnr, "Enter number sides: ", 1, 100);
+
+                    diceF.rollDice(myRolls, mySides, myDice);
+
+                    break;
+
+                case 3: //Results array: get the array with the results of the last simulation.
+                    break;
+
+                default:
+                    choice = -1;
+
+            }
+
+            } while (choice != 0);
+
+
          }
+
 
         /**
          * Private helper method that displays the menu.
@@ -47,6 +90,7 @@ public class DiceManager {
             System.out.println("2) Custom dice rolling (You enter the number of rolls, dice and sides.)");
             System.out.println("3) Get the array showing the results of the last simulation.");
         }
+        
 
         /**
          * (Mostly) Error-proof method to get an int in a specified range from the user.
