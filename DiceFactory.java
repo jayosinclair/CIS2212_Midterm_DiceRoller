@@ -37,7 +37,7 @@ public class DiceFactory {
 		
 			for (int i = 0; i < numberOfRolls; i++){ //FIXME: Need to check on indexing...
 
-				System.out.println("Round " + (i + 1) + ":");
+				//System.out.println("Round " + (i + 1) + ":"); //Here for debugging.
 
 				for (int j = 0; j < numberOfDice; j++){
 
@@ -45,11 +45,11 @@ public class DiceFactory {
 
 					thisRoll = rgen.nextInt(numberOfSides) + 1; //Need to adjust for 0 indexing.
 
-					System.out.println("Current Roll " + (j + 1) + ": " + thisRoll); //Here for debugging.
+					//System.out.println("Current Roll " + (j + 1) + ": " + thisRoll); //Here for debugging.
 
 					sum += thisRoll;
 
-					System.out.println("Current Sum " + (j + 1) + ": " + sum); //Here for debugging.
+					//System.out.println("Current Sum " + (j + 1) + ": " + sum); //Here for debugging.
 
 				}
 
@@ -70,9 +70,6 @@ public class DiceFactory {
 				thisRoll = 0;
 				System.out.print("\n\n");
 
-				
-
-
 
 		}
 
@@ -81,13 +78,13 @@ public class DiceFactory {
 
 		for (int i = 0; i < arr.length; ++i){
 
-			System.out.println((i + 1)  + "\t " + arr[i]);
+			System.out.println((i + 1)  + ")\t " + arr[i]);
 
 		}
 
 
 		//Call getResults at the end and return the results.
-
+		getResults();
 
 	}
 
@@ -97,6 +94,38 @@ public class DiceFactory {
 	 * The getResults method builds a String showing the results of the last simulation.
 	 * @return - the String containing the results of the simulation.
 	 */
+
+	public String getResults(){
+
+		String strVal = "";
+		StringBuilder sb = new StringBuilder(strVal);
+
+		int lastSim [] = arr.clone();
+
+		if (lastSim.length == 0) {
+
+			return "";
+
+		}
+
+		else {
+
+			sb.append("STR_");
+
+			for (int i = 0; i < lastSim.length; i++){
+
+				sb.append(lastSim[i]);
+
+			}
+	
+		}
+
+		strVal = sb.toString();
+
+		return strVal;
+
+	}
+
 
 	//TODO: Write the getResults method as described in the above comment.
 	//      The method does not need parameters.

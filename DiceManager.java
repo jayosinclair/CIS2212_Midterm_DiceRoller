@@ -41,12 +41,10 @@ public class DiceManager {
             
             choice = inputInt(scnr, "Enter Choice: ", 0, 3);
 
-            System.out.println("You chose: " + choice);
-            
-
             switch (choice){
 
                 case 0: // Do nothing to break out of the menu loop.
+
                     break;
                 
                 case 1: //Quick roll: call rollDice method and send the constants declared above.
@@ -57,24 +55,26 @@ public class DiceManager {
 
                 case 2: //Custom roll: use inputInt to get the number of rolls, dice, and sides.
 
-                    myRolls = inputInt(scnr, "Enter nuber rolls: ", 1, 300);
-                    myDice = inputInt(scnr, "Enter number dice: ", 1, 3);
-                    mySides = inputInt(scnr, "Enter number sides: ", 1, 100);
+                    myRolls = inputInt(scnr, "Enter Number of Rolls: ", 1, Integer.MAX_VALUE); //Gemini helped with getting the constant MAX_VALUE in accordance with the assignment's requirement to use AI.
+                    myDice = inputInt(scnr, "Enter Number of Dice: ", 1, Integer.MAX_VALUE);
+                    mySides = inputInt(scnr, "Enter Number of Sides: ", 2, Integer.MAX_VALUE); //Can't have a one-sided dice, so set min at 2.
 
                     diceF.rollDice(myRolls, mySides, myDice);
 
                     break;
 
                 case 3: //Results array: get the array with the results of the last simulation.
+
                     break;
 
                 default:
+
+                    System.out.println("An error occurred. Please re-run the program.");
                     choice = -1;
 
             }
 
             } while (choice != 0);
-
 
          }
 
@@ -84,7 +84,7 @@ public class DiceManager {
          */
         private void displayMenu()
         {
-            System.out.println("\nHere's the menu of choices -");
+            System.out.println("\nChoose an Option -");
             System.out.println("0) Quit");
             System.out.printf("1) Quick roll with the default values (rolls = %d, dice = %d, sides = %d)\n", ROLLS, DICE, SIDES);
             System.out.println("2) Custom dice rolling (You enter the number of rolls, dice and sides.)");
