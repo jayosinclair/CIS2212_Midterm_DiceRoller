@@ -28,7 +28,9 @@ public class DiceFactory {
 
 	public void rollDice(int numberOfRolls, int numberOfSides, int numberOfDice){
 
-		arr = new int[numberOfSides * numberOfDice];
+		arr = new int[((numberOfSides) * numberOfDice) - numberOfDice + 1]; //The array's size needs to account for not being able to roll 0s. If 0 can be rolled, which wouldn't make sense, this is not correct.
+
+		System.out.println("Array size: " + arr.length); //Here for debugging.
 
 		int sum = 0; //Initialize before nested loop starts.
 		int thisRoll = 0;
@@ -37,7 +39,7 @@ public class DiceFactory {
 		
 			for (int i = 0; i < numberOfRolls; i++){ //FIXME: Need to check on indexing...
 
-				//System.out.println("Round " + (i + 1) + ":"); //Here for debugging.
+				System.out.println("Round " + (i + 1) + ":"); //Here for debugging.
 
 				for (int j = 0; j < numberOfDice; j++){
 
@@ -45,11 +47,11 @@ public class DiceFactory {
 
 					thisRoll = rgen.nextInt(numberOfSides) + 1; //Need to adjust for 0 indexing.
 
-					//System.out.println("Current Roll " + (j + 1) + ": " + thisRoll); //Here for debugging.
+					System.out.println("Current Roll " + (j + 1) + ": " + thisRoll); //Here for debugging.
 
 					sum += thisRoll;
 
-					//System.out.println("Current Sum " + (j + 1) + ": " + sum); //Here for debugging.
+					System.out.println("Current Sum " + (j + 1) + ": " + sum); //Here for debugging.
 
 				}
 
@@ -58,7 +60,7 @@ public class DiceFactory {
 
 				for (int k = 0; k < arr.length; ++k){
 
-					if (k + 1 == sum){
+					if (k + numberOfDice == sum){ //Backing out the number of dice from the array index is needed since neither dice can roll a 0 value.
 
 						arr[k]++;
 
@@ -78,7 +80,7 @@ public class DiceFactory {
 
 		for (int i = 0; i < arr.length; ++i){
 
-			System.out.println((i + 1)  + ")\t " + arr[i]);
+			System.out.println((i + numberOfDice)  + ")\t " + arr[i]); //Adding numberOfDice makes it so my output is numberOfDice - 1 since it's 0 indexed.
 
 		}
 
