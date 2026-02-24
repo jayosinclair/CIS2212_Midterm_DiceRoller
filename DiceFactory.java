@@ -28,7 +28,13 @@ public class DiceFactory {
 
 	public void rollDice(int numberOfRolls, int numberOfSides, int numberOfDice){
 
-		arr = new int[((numberOfSides) * numberOfDice) - numberOfDice + 1]; //The array's size needs to account for not being able to roll 0s. If 0 can be rolled, which wouldn't make sense, this is not correct.
+		myNumberOfRolls = numberOfRolls; //Set instance variables to what's passed in for the "last" simulation.
+		myNumberOfSides = numberOfSides;
+		myNumberOfDice = numberOfDice;
+
+		arr = new int[((numberOfSides) * numberOfDice) - numberOfDice + 1]; //The array's size needs to account for not being able to roll 0s. 
+		//If 0 can be rolled, which wouldn't make sense, this is not correct. Note: this was part of the AI assignment. I figured it out on my
+		//own, but then used Gemini to verify I had the logic correct if using more than two dice.
 
 		System.out.println("Array size: " + arr.length); //Here for debugging.
 
@@ -91,43 +97,6 @@ public class DiceFactory {
 	}
 
      
-    
-	/**
-	 * The getResults method builds a String showing the results of the last simulation.
-	 * @return - the String containing the results of the simulation.
-	 */
-
-	public String getResults(){
-
-		String strVal = "";
-		StringBuilder sb = new StringBuilder(strVal);
-
-		int lastSim [] = arr.clone();
-
-		if (lastSim.length == 0) {
-
-			return "";
-
-		}
-
-		else {
-
-			sb.append("STR_");
-
-			for (int i = 0; i < lastSim.length; i++){
-
-				sb.append(lastSim[i]);
-
-			}
-	
-		}
-
-		strVal = sb.toString();
-
-		return strVal;
-
-	}
-
 
 	//TODO: Write the getResults method as described in the above comment.
 	//      The method does not need parameters.
@@ -141,6 +110,43 @@ public class DiceFactory {
 	 */
 	
 	// TODO: If the results array is null, then return null.  Otherwise, return a clone of the results array.
+
+    
+	/**
+	 * The getResults method builds a String showing the results of the last simulation.
+	 * @return - the String containing the results of the simulation.
+	 */
+
+	public String getResults(){
+
+		String strVal = "";
+		StringBuilder sb = new StringBuilder(strVal);
+
+		if (arr == null){ //If array is null, don't even bother to try to clone it. Just return an empty string so an exception isn't thrown.
+
+			return "";
+
+		}
+
+		int lastSim [] = arr.clone();
+
+
+		sb.append("[");
+
+		for (int i = 0; i < lastSim.length - 1; i++){ //Need to -1 to treat the last one separately to exclude the pesky comma.
+
+			sb.append(lastSim[i]);
+			sb.append(", ");
+		}
+
+		sb.append(lastSim[lastSim.length -1]); //Handle the last entry in the array.
+		sb.append("]");
+	
+		strVal = sb.toString();
+
+		return strVal;
+
+	}
 
 }
 

@@ -65,11 +65,25 @@ public class DiceManager {
 
                 case 3: //Results array: get the array with the results of the last simulation.
 
+                    //Need to actually return null if a simulation hasn't yet been run.
+
+                    if (diceF.getResults().equals("")){
+
+                        System.out.println("\nResults Array : null");
+
+                    }
+
+                    else {
+
+                        System.out.println("\nResults Array : " + diceF.getResults());
+
+                    }
+
                     break;
 
                 default:
 
-                    System.out.println("An error occurred. Please re-run the program.");
+                    System.out.println("\nAn error occurred. Please re-run the program.");
                     choice = -1;
 
             }
