@@ -72,21 +72,8 @@ public class DiceFactory {
 
 		}
 
-		
-		//Print array Contents.
-
-		//for (int i = 0; i < arr.length; ++i){
-			//This formatting only works while the sums are < 99. Then the right column shifts to the right. Should be good enough...
-		//	System.out.printf("%2d", i + numberOfDice); //Adding numberOfDice makes it so my output is numberOfDice - 1 since it's 0 indexed.
-		//	System.out.printf(")");
-		//	System.out.printf("%6d\n", arr[i]);
-
-		//}
-
-
 		//Call getResults at the end and return the results.
 		
-		System.out.print("\n\n");
 		System.out.print(getResults());
 
 	}
@@ -103,23 +90,27 @@ public class DiceFactory {
 
 		if (arr == null){ //If array is null, don't even bother to try to clone it. Just return an empty string so an exception isn't thrown.
 
-			return "";
+			return strVal;
 
 		}
 
-		int lastSim [] = arr.clone();
+		for (int i = 0; i < arr.length; i++){
 
- 		sb.append("[");
+			String left;
+			String middle;
+			String right;
 
-		for (int i = 0; i < lastSim.length - 1; i++){ //Need to -1 to treat the last one separately to exclude the pesky comma.
 
-			sb.append(lastSim[i]);
-			sb.append(", ");
+			left = String.format("%3d", i);
+			middle = ")";
+			right = String.format("%6d\n", arr[i]);
+
+			sb.append(left);
+			sb.append(middle);
+			sb.append(right);
+
 		}
 
-		sb.append(lastSim[lastSim.length -1]); //Handle the last entry in the array.
-		sb.append("]");
-	
 		strVal = sb.toString();
 
 		return strVal;
