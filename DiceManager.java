@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class DiceManager {
@@ -7,7 +8,7 @@ public class DiceManager {
         final int DICE = 2;
         final int SIDES = 6;
 
-        //TODO: Declare variables for a DiceFactory and console input.
+        //Declare variables for a DiceFactory and console input.
         
         private int choice = -1;
         private int myRolls = -1;
@@ -22,7 +23,7 @@ public class DiceManager {
          */
         public DiceManager()
         {
-        	//TODO: Instantiate the DiceFactory and Scanner objects.
+        	//Instantiate the DiceFactory and Scanner objects.
 
             diceF = new DiceFactory();
             scnr = new Scanner(System.in);
@@ -35,11 +36,13 @@ public class DiceManager {
         public void go()
         {
 
+            System.out.println("\nWelcome to Dice Roller.\n\n");
+
             do{
             
             displayMenu();
             
-            choice = inputInt(scnr, "Enter Choice: ", 0, 3);
+            choice = inputInt(scnr, "\nEnter Your Choice: ", 0, 3);
 
             switch (choice){
 
@@ -65,19 +68,7 @@ public class DiceManager {
 
                 case 3: //Results array: get the array with the results of the last simulation.
 
-                    //Need to actually return null if a simulation hasn't yet been run.
-
-                    if (diceF.getResults().equals("")){
-
-                        System.out.println("\nResults Array : null");
-
-                    }
-
-                    else {
-
-                        System.out.println("\nResults Array : " + diceF.getResults());
-
-                    }
+                    System.out.println("Results Array: " + Arrays.toString(diceF.getLastSimulation())); //The Arrays.toString method (and associated import above) was found just with a simple google search (which taps into Gemini), as directed in the assignment for AI use.
 
                     break;
 
@@ -102,7 +93,7 @@ public class DiceManager {
             System.out.println("0) Quit");
             System.out.printf("1) Quick roll with the default values (rolls = %d, dice = %d, sides = %d)\n", ROLLS, DICE, SIDES);
             System.out.println("2) Custom dice rolling (You enter the number of rolls, dice and sides.)");
-            System.out.println("3) Get the array showing the results of the last simulation.");
+            System.out.println("3) Get the array showing the results of the last simulation.\n");
         }
         
 
