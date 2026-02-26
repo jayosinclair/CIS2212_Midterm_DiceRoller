@@ -68,7 +68,7 @@ public class DiceManager {
 
                 case 3: //Results array: get the array with the results of the last simulation.
 
-                    System.out.println("Results Array: " + Arrays.toString(diceF.getLastSimulation())); //The Arrays.toString method (and associated import above) was found just with a simple google search (which taps into Gemini), as directed in the assignment for AI use.
+                    System.out.println("\nResults Array: " + Arrays.toString(diceF.getLastSimulation())); //The Arrays.toString method (and associated import above) was found just with a simple google search (which taps into Gemini), as directed in the assignment for AI use.
 
                     break;
 

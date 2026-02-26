@@ -39,19 +39,13 @@ public class DiceFactory {
 		
 			for (int i = 0; i < numberOfRolls; i++){  //Outer loop handles each trial.
 
-				//System.out.println("Round " + (i + 1) + ":"); //Here for debugging.
-
 				for (int j = 0; j < numberOfDice; j++){ //Inner loop rolls each dice individually and adds to the sum accumulator.
 
 					//Simulate a round of rolling each dice one time, adding to the total with each throw.
 
 					thisRoll = rgen.nextInt(numberOfSides) + 1; //Need to adjust for 0 indexing.
 
-					//System.out.println("Current Roll " + (j + 1) + ": " + thisRoll); //Here for debugging.
-
 					sum += thisRoll;
-
-					//System.out.println("Current Sum " + (j + 1) + ": " + sum); //Here for debugging.
 
 				}
 
@@ -74,6 +68,7 @@ public class DiceFactory {
 
 		//Call getResults at the end and return the results.
 		
+		System.out.print("\n");
 		System.out.print(getResults());
 
 	}
@@ -101,7 +96,7 @@ public class DiceFactory {
 			String right;
 
 
-			left = String.format("%3d", i);
+			left = String.format("%3d", (i + myNumberOfDice)); //Need to add the myNumberOfDice instance variable to i to retrieve the correct sum given indexing.
 			middle = ")";
 			right = String.format("%6d\n", arr[i]);
 
@@ -139,8 +134,6 @@ public class DiceFactory {
 		return lastSimArray;
 
 	}
-
-
 
 }
 
